@@ -1,0 +1,95 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+
+<md-card class="example-card" *ngIf="!isLoading">
+  <h4 class="card-header">{{itq.name}} - {{itq.description}}</h4>
+  <div class="card-block">
+    <md-list *ngIf="!isDetails">
+      <h3 md-subheader>Subject / Level</h3>
+      <md-list-item *ngFor="let resource of itq.resources">
+        <md-icon md-list-icon>folder</md-icon>
+        <h4 md-line>{{resource.subject}}</h4>
+        <button md-raised-button color="primary" (click)="viewSubject(resource)">SELECT</button>
+        <!-- <p md-line> {{folder.updated | date}} </p> -->
+      </md-list-item>
+      <!-- <md-divider></md-divider>
+      <h3 md-subheader>Notes</h3>
+      <md-list-item *ngFor="let note of notes">
+        <md-icon md-list-icon>note</md-icon>
+        <h4 md-line>{{note.name}}</h4>
+        <p md-line> {{note.updated | date}} </p>
+      </md-list-item> -->
+    </md-list>
+  </div>
+  <div id="detail" *ngIf="isDetails">
+
+      <button md-raised-button  (click)="back()">BACK</button>
+      <button md-raised-button color="primary" (click)="printSelected(detail)" [disabled]="!isSelected">Print</button>
+      <p></p>
+      <h3>{{detail.subject}}</h3>
+      <md-checkbox (click)="toggleAll()"  [(ngModel)]="isAllSelected">Select All</md-checkbox>
+      <p></p>
+      <md-card *ngFor="let topic of topics">
+        <md-card-header>
+          <div md-card-avatar>
+            <md-checkbox id="{{topic.SNo}}"  [(ngModel)]="topic.selected" (change)="optionToggled()"></md-checkbox>
+          </div>
+          <md-card-title><b>S/No. {{topic.SNo}}</b></md-card-title>
+          <md-card-subtitle>{{topic.topic}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <div fxLayout='row wrap' >
+            <div fxFlex="35" fxFlex.lt-sm="100%">
+              <p><b>ITQ Synopsis:</b></p>
+              <span [innerHTML]="topic.itqsynopsis"></span>
+            </div>
+            <div fxFlex="5" fxFlex.lt-sm="100%">
+            </div>
+            <div fxFlex="35" fxFlex.lt-sm="100%">
+              <p><b>MCE Synopsis:</b></p>
+              <span [innerHTML]="topic.mcesynopsis"></span>
+            </div>
+            <div fxFlex="5" fxFlex.lt-sm="100%">
+            </div>
+            <div fxFlex="20" fxFlex.lt-sm="100%">
+              <p><b>Additional Information:</b></p>
+              <p><span [innerHTML]="topic.addinfo"></span></p>
+            </div>
+          </div>
+        </md-card-content>
+        <md-card-actions>
+          <!-- <button md-button color="primary" (click)="launch(detail.folder+'/'+topic.resID+'/'+topic.startfile)">LAUNCH</button> -->
+          <button md-button color="primary" (click)="openDialog(detail.folder+'/'+topic.resID+'/'+topic.startfile, topic.topic)">LAUNCH</button>
+        </md-card-actions>
+      </md-card>
+
+        <!-- <thead>
+          <tr>
+            <th style="width: 1%"><input type="checkbox" (click)="toggleAll()"  [(ngModel)]="isAllSelected" tabindex="0"/></th>
+            <th style="width: 3%">S/No</th>
+            <th style="width: 15%">ITQ Topic</th>
+            <th style="width: 30%">ITQ Synopsis</th>
+            <th style="width: 30%">MCE Synopsis</th>
+            <th style="width: 15%">Additional Information</th>
+            <th style="width: 6%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let topic of topics">
+            <td><input type="checkbox" id="{{topic.SNo}}" [(ngModel)]="topic.selected" (change)="optionToggled()" tabindex="0"/></td>
+            <td>{{topic.SNo}}</td>
+            <td>{{topic.topic}}</td>
+            <td><span [innerHTML]="topic.itqsynopsis"></span></td>
+            <td><span [innerHTML]="topic.mcesynopsis"></span></td>
+            <td><span [innerHTML]="topic.addinfo"></span></td>
+            <td>
+              <button class="btn btn-info btn-select btn-sm" (click)="launch(detail.folder+'/'+topic.resID+'/'+topic.startfile)">LAUNCH</button>
+            </td>
+          </tr>
+        </tbody> -->
+  </div>
+
+
+</md-card>

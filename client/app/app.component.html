@@ -1,0 +1,52 @@
+<div class="container">
+  <md-toolbar color="primary">
+    <!-- <span class="mat-button-wrapper">
+      <img alt="MCE" src="assets/images/MCE logo.png"  style="height: 60%; width: 60%;">
+      <span>Material</span>
+    </span> -->
+    <button md-button routerLink="/itqs">
+      <md-icon>home</md-icon> MCE ITQ
+    </button>
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+    <button md-button routerLink="/login" *ngIf="!auth.loggedIn">Login</button>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <!-- <button md-button routerLink="/itqs">ITQs</button> -->
+      <button md-button routerLink="/help">Help</button>
+      <button md-button routerLink="/register" *ngIf="auth.loggedIn && auth.isAdmin">Register</button>
+      <button md-button routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
+        <i class="fa fa-user"></i> Account
+      </button>
+      <button md-button routerLink="/admin" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">Admin</button>
+      <button md-button class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn" fxShow="false" fxShow.gt-sm>
+        <i class="fa fa-user"></i> Hello ({{auth.currentUser.username}})
+      </button>
+      <button flex md-button routerLink="/logout" routerLinkActive="active" *ngIf="auth.loggedIn">
+        <i class="fa fa-sign-out"></i> Logout
+      </button>
+    </div>
+
+    <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+     <md-icon>menu</md-icon>
+    </button>
+
+</md-toolbar>
+<md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item routerLink="/help">Help</button>
+    <button md-menu-item routerLink="/register" *ngIf="auth.loggedIn && auth.isAdmin">Register</button>
+    <button md-menu-item routerLink="/account" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
+      <i class="fa fa-user"></i> Account
+    </button>
+    <button md-menu-item routerLink="/admin" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">Admin</button>
+    <button md-menu-item class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn" fxShow="false" fxShow.gt-sm>
+      <i class="fa fa-user"></i> Hello ({{auth.currentUser.username}})
+    </button>
+    <button md-menu-item routerLink="/logout" routerLinkActive="active" *ngIf="auth.loggedIn">
+      <i class="fa fa-sign-out"></i> Logout
+    </button>
+    <!--<button md-menu-item>Help</button>-->
+</md-menu>
+
+  <router-outlet></router-outlet>
+
+</div>

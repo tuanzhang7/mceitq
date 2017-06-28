@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+body {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+@media (min-width: 1800px) {
+    .container{
+        max-width: 1400px;
+        margin: auto;
+    }
+}
+table {
+    table-layout: fixed;
+    font-size:1em;
+}
+.table tbody td,.table thead th,{
+  text-align:left;
+}
+.table tbody tr.selected, .table tbody tr.selected:hover td{background-color:#D6EBFF;}
+.topic-title th{background-color:#fff!important;}
+
+.example-form {
+  width: 300px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.center {
+    margin: auto;
+    width: 100%;
+}
