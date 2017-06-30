@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ItqService } from '../services/itq.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { ViewEncapsulation } from '@angular/core';
@@ -27,7 +27,8 @@ export class ItqComponent implements OnInit {
     private http: Http,
     public toast: ToastComponent,
     public dialog: MdDialog,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.getItq(this.route.snapshot.params['id']);

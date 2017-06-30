@@ -1,7 +1,6 @@
 abstract class BaseCtrl {
 
   abstract model: any;
-
   // Get all
   getAll = (req, res) => {
     this.model.find({}, (err, docs) => {
@@ -35,9 +34,7 @@ abstract class BaseCtrl {
 
   // Get by id
   get = (req, res) => {
-    console.error('----------- get:' + req.params.name);
     this.model.findOne({ _id: req.params.id }, (err, obj) => {
-      console.error('get by id:' + req.params.id, obj);
       if (err) { return console.error(err); }
       res.json(obj);
     });

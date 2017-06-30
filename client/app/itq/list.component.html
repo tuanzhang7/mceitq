@@ -10,7 +10,7 @@
       <md-list-item *ngFor="let itq of itqs">
         <md-icon md-list-icon>folder</md-icon>
         <h4 md-line>{{itq.name}} - {{itq.description}}</h4>
-        <button md-raised-button color="primary" routerLink="/itq/{{itq.name}}">SELECT</button>
+        <button md-raised-button color="primary" routerLink="/itq/{{encodeURIComponent(itq.name)}}">SELECT</button>
         <!-- <p md-line> {{folder.updated | date}} </p> -->
       </md-list-item>
       <!-- <md-divider></md-divider>

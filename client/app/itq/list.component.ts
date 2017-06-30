@@ -30,4 +30,9 @@ export class ItqListComponent implements OnInit {
       () => this.isLoading = false
     );
   }
+
+  encodeURIComponent(url) {
+    return encodeURIComponent(url);
+    // return encodeURI(url);
+  }
 }
