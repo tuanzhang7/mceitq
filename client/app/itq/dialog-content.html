@@ -1,6 +1,6 @@
 
 <h1 md-dialog-title>{{ data.title }}</h1>
-<div md-dialog-content>
+<div md-dialog-content oncontextmenu="return false">
   <video width="800" height="600"  autoplay controls controlsList="nodownload">
       <source data-src="{{ data.videoUrl }}" type="video/mp4">
   </video>

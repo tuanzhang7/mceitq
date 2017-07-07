@@ -23,12 +23,12 @@ export default function setRoutes(app) {
   // router.route('/cat/:id').put(catCtrl.update);
   // router.route('/cat/:id').delete(catCtrl.delete);
   // Cats
-  router.route('/itqs').get(itqCtrl.getByUser);
+  router.route('/itqs').get(auth.isAuthenticated, itqCtrl.getByUser);
   router.route('/itqs/count').get(itqCtrl.count);
   router.route('/itq').post(itqCtrl.insert);
-  router.route('/itq/:name').get(itqCtrl.getByName);
-  router.route('/itq/:id').put(itqCtrl.update);
-  router.route('/itq/:id').delete(itqCtrl.delete);
+  router.route('/itq/:name').get(auth.isAuthenticated, itqCtrl.getByName);
+  // router.route('/itq/:id').put(itqCtrl.update);
+  // router.route('/itq/:id').delete(itqCtrl.delete);
   // Users
   router.route('/login').post(userCtrl.login);
   router.route('/users').get(auth.isAuthenticated, userCtrl.getAll);

@@ -16,12 +16,12 @@ import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 
 const routes: Routes = [
-  { path: '', component: AboutComponent },
+  { path: '', component: ItqListComponent, canActivate: [AuthGuardLogin] },
   { path: 'help', component: AboutComponent },
   { path: 'cats', component: CatsComponent },
-  { path: 'itqs', component: ItqListComponent },
-  { path: 'itq/:id', component: ItqComponent },
-  { path: 'register', component: RegisterComponent},
+  { path: 'itqs', component: ItqListComponent , canActivate: [AuthGuardLogin]},
+  { path: 'itq/:id', component: ItqComponent , canActivate: [AuthGuardLogin]},
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuardAdmin]},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardLogin]},
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardAdmin] },

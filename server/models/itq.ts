@@ -4,11 +4,13 @@ import { Iitq } from '../../interfaces/Iitq';
 const itqSchema = new mongoose.Schema({
   name: String,
   description: String,
+  roles: [String],
   resources: [
     {
       subject: String,
       folder: String,
-        topics: [
+      deny: [String],
+      topics: [
         {
           SNo: String,
           topic: String,
