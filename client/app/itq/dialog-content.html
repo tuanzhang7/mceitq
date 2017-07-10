@@ -1,10 +1,15 @@
 
 <h1 md-dialog-title>{{ data.title }}</h1>
 <div md-dialog-content oncontextmenu="return false">
-  <video width="800" height="600"  autoplay controls controlsList="nodownload">
+  {{data.mediaType}}
+  <video width="800" height="600"  autoplay controls controlsList="nodownload" *ngIf="data.mediaType==='mp4'">
       <source data-src="{{ data.videoUrl }}" type="video/mp4">
   </video>
+
+  <!--<iframe class="e2e-iframe-trusted-src" width="640" height="390" [src]="videoUrl"></iframe>-->
+  <embed [attr.src]="data.saveUrl" width="800" height="600" flashvars="id=hello world" wmode="transparent" *ngIf="data.mediaType!='mp4'" />
 </div>
 <div md-dialog-actions>
   <button md-button md-dialog-close="Option 1">Close</button>
 </div>
+

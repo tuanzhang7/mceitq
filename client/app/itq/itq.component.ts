@@ -6,7 +6,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { ViewEncapsulation } from '@angular/core';
 import { Iitq } from '../../../interfaces/Iitq';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-itqs',
   templateUrl: './itq.component.html',
@@ -28,7 +28,8 @@ export class ItqComponent implements OnInit {
     public toast: ToastComponent,
     public dialog: MdDialog,
     private route: ActivatedRoute,
-    private router: ActivatedRoute) { }
+    private router: ActivatedRoute,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.getItq(this.route.snapshot.params['id']);
@@ -73,15 +74,22 @@ export class ItqComponent implements OnInit {
     const w = screen.width;
     const h = screen.height;
     const winprops = 'height=' + h + ',width=' + w + ',top=0,left=0,scrollbars=0, resizable=0';
-    console.log('/assets/resources/' + mypage);
+    // console.log('/assets/resources/' + mypage);
     window.open('/assets/resources/' + mypage, 'Resources', winprops);
   }
 
-  openDialog(mypage, title) {
+  openDialog(mypage: string, title) {
     const videoUrl = '/assets/resources/' + mypage;
+    const saveUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
+    let mediaType = 'html';
+    if (mypage.endsWith('.mp4')) {
+      mediaType = 'mp4'
+    }
     const data = {
       videoUrl: videoUrl,
-      title: title
+      saveUrl: saveUrl,
+      title: title,
+      mediaType: mediaType,
     }
     const dialogRef = this.dialog.open(DialogResultComponent, {
       data: data,
