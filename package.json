@@ -11,7 +11,7 @@
     "start": "node dist/server/app.js",
     "docker-start": "node server/app.js",
     "predev": "tsc -p server",
-    "dev": "concurrently \"ng serve -pc proxy.conf.json --open\" \"tsc -w -p server\" \"nodemon dist/server/app.js\"",
+    "dev": "concurrently \"ng serve --proxy-config proxy.conf.json --open\" \"tsc -w -p server\" \"nodemon dist/server/app.js\"",
     "prod": "concurrently \"ng build -aot -prod && tsc -p server && node dist/server/app.js\"",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +22,7 @@
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/cdk": "^2.0.0-beta.8",
+    "@angular/cli": "^1.1.2",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
@@ -46,14 +47,14 @@
     "jquery": "^3.2.1",
     "jsonwebtoken": "^7.4.1",
     "lodash": "^4.17.4",
-    "mongoose": "^4.10.4",
+    "mongoose": "^4.11.1",
     "morgan": "^1.8.2",
     "rxjs": "^5.1.0",
     "tether": "1.4.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.1.2",
+    "@angular/cli": "^1.2.0",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",

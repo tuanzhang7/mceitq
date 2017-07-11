@@ -45,23 +45,36 @@ app.use(session({
 
 
 app.use(morgan('dev'));
-mongoose.connect(process.env.MONGODB_URI);
-const db = mongoose.connection;
-(<any>mongoose).Promise = global.Promise;
+console.log('mongodb URI:' + process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI);
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB =====');
-  setRoutes(app);
+const promise = mongoose.createConnection(process.env.MONGODB_URI, {
+  useMongoClient: true,
+  /* other options */
+});
 
-  app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+promise.then(function(db) {
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('openUri', () => {
+    console.log('Connected to MongoDB =====');
   });
+  /* Use `db`, for instance `db.model()`
+});
+// Or, if you already have a connection
+connection.openUri('mongodb://localhost/myapp', { /* options */
+});
 
-  app.listen(app.get('port'), () => {
-    console.log('Angular Full Stack listening on port ' + app.get('port'));
-  });
+// const db = mongoose.connection;
+// (<any>mongoose).Promise = global.Promise;
 
+setRoutes(app);
+console.log('Serve client =====');
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+app.listen(app.get('port'), () => {
+  console.log('Angular Full Stack listening on port ' + app.get('port'));
 });
 
 export { app };
