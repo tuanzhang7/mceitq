@@ -6,14 +6,14 @@ export default class ItqCtrl extends BaseCtrl {
 
   getByName = (req, res) => {
     const username = req.session.user.username; // 'ITQ375_user';
-    if(!username){
+    if (!username) {
       return res.json({});
     }
 
     this.model.findOne({ name: req.params.name }, (err, doc) => {
       if (err) { return console.error(err); }
 
-      _.remove(doc.resources, function(currentObject:any) {
+      _.remove(doc.resources, function (currentObject: any) {
         return _.includes(currentObject.deny, username);
       });
 
@@ -24,22 +24,22 @@ export default class ItqCtrl extends BaseCtrl {
   getByUser = (req, res) => {
     // console.log('req.session:', req.session);
     const username = req.session.user.username; // 'ITQ375_user';
-    if(!username){
+    if (!username) {
       return res.json({});
     }
     // req.user.username;
-    var query = {};
-    if(req.session.user.role != 'admin'){
-      query = {roles:username};
+    let query = {};
+    if (req.session.user.role !== 'admin') {
+      query = { roles: username };
     }
     this.model.find(query, (err, docs) => {
       if (err) { return console.error(err); }
       docs.forEach(doc => {
-        _.remove(doc.resources, function(currentObject:any) {
+        _.remove(doc.resources, function (currentObject: any) {
           return _.includes(currentObject.deny, username);
         });
       });
-      
+
       console.log('return:', docs);
       res.json(docs);
     });

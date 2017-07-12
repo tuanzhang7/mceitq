@@ -2,17 +2,31 @@ version: '2' # specify docker-compose version
 
 # Define the services/containers to be run
 services:
-  angular: # name of the first service
-    build: angular-client # specify the directory of the Dockerfile
-    ports:
-      - "4200:4200" # specify port forewarding
-
-  express: #name of the second service
-    build: express-server # specify the directory of the Dockerfile
-    ports:
-      - "3000:3000" #specify ports forewarding
-
-  database: # name of the third service
+  local-mongod: # name of the third service 
+  # docker run -d --name local-mongod -p 27017:27017 mongo
     image: mongo # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
+    container_name: "local-mongod"
+  nginx-proxy: # name of the first service
+  # docker run -d --name nginx-proxy -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+    image: jwilder/nginx-proxy # specify the directory of the Dockerfile
+    ports:
+      - "80:80" # specify port forewarding
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+  showroom: #name of the second service
+  # docker run -d --name showroom --link local-mongod:local-mongod --env VIRTUAL_HOST=localhost -p 3000:3000 showroom:dev
+    # build: . # specify the directory of the Dockerfile
+    image: tuanzhang/nodejs
+    ports:
+      - "3000:3000" #specify ports forewarding
+    links:
+      - local-mongod
+    environment:
+      - VIRTUAL_HOST=localhost # ec2-13-228-121-119.ap-southeast-1.compute.amazonaws.com
+      - MONGODB_URI=mongodb://local-mongod:27017/showroom
+    depends_on:
+      - "local-mongod"
+
