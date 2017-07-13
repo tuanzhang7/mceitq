@@ -79,7 +79,8 @@ export class ItqComponent implements OnInit {
   }
 
   openDialog(mypage: string, title) {
-    const videoUrl = '/assets/resources/' + mypage;
+    const s3Url = 'https://s3-ap-southeast-1.amazonaws.com/mce-showroom-content/Resources/';
+    const videoUrl = s3Url + mypage;
     const saveUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
     let mediaType = 'html';
     if (mypage.endsWith('.mp4')) {

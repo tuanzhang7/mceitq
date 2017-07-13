@@ -28,8 +28,8 @@
       <button md-raised-button  (click)="back()">BACK</button>
       <button md-raised-button color="primary" (click)="printSelected(detail)" [disabled]="!isSelected">Print</button>
       <p></p>
-      <h3>{{detail.subject}}</h3>
-      <md-checkbox (click)="toggleAll()"  [(ngModel)]="isAllSelected">Select All</md-checkbox>
+      <div style="text-align:center"><h3>{{detail.subject}}</h3></div>
+      <md-checkbox (click)="toggleAll()"  [(ngModel)]="isAllSelected" style="margin-left: 22px">Select All</md-checkbox>
       <p></p>
       <md-card *ngFor="let topic of topics">
         <md-card-header>
