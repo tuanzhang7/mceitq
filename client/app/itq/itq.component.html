@@ -5,6 +5,7 @@
 
 <md-card class="example-card" *ngIf="!isLoading">
   <h4 class="card-header">{{itq.name}} - {{itq.description}}</h4>
+  <button md-button color="warn" (click)="openContactDialog(itq.contactus)">Contact Us</button>
   <div class="card-block">
     <md-list *ngIf="!isDetails">
       <h3 md-subheader>Subject / Level</h3>
@@ -25,46 +26,48 @@
   </div>
   <div id="detail" *ngIf="isDetails">
 
-      <button md-raised-button  (click)="back()">BACK</button>
+      <button md-raised-button  (click)="back()" affix>BACK</button>
       <button md-raised-button color="primary" (click)="printSelected(detail)" [disabled]="!isSelected">Print</button>
       <p></p>
-      <div style="text-align:center"><h3>{{detail.subject}}</h3></div>
+      <div style="text-align:center"><h1>{{detail.subject}}</h1></div>
       <md-checkbox (click)="toggleAll()"  [(ngModel)]="isAllSelected" style="margin-left: 22px">Select All</md-checkbox>
       <p></p>
-      <md-card *ngFor="let topic of topics">
-        <md-card-header>
-          <div md-card-avatar>
-            <md-checkbox id="{{topic.SNo}}"  [(ngModel)]="topic.selected" (change)="optionToggled()"></md-checkbox>
-          </div>
-          <md-card-title><b>S/No. {{topic.SNo}}</b></md-card-title>
-          <md-card-subtitle>{{topic.topic}}</md-card-subtitle>
-        </md-card-header>
-        <md-card-content>
-          <div fxLayout='row wrap' >
-            <div fxFlex="35" fxFlex.lt-sm="100%">
-              <p><b>ITQ Synopsis:</b></p>
-              <span [innerHTML]="topic.itqsynopsis"></span>
-            </div>
-            <div fxFlex="5" fxFlex.lt-sm="100%">
-            </div>
-            <div fxFlex="35" fxFlex.lt-sm="100%">
-              <p><b>MCE Synopsis:</b></p>
-              <span [innerHTML]="topic.mcesynopsis"></span>
-            </div>
-            <div fxFlex="5" fxFlex.lt-sm="100%">
-            </div>
-            <div fxFlex="20" fxFlex.lt-sm="100%">
-              <p><b>Additional Information:</b></p>
-              <p><span [innerHTML]="topic.addinfo"></span></p>
-            </div>
-          </div>
-        </md-card-content>
-        <md-card-actions>
-          <!-- <button md-button color="primary" (click)="launch(detail.folder+'/'+topic.resID+'/'+topic.startfile)">LAUNCH</button> -->
-          <button md-button color="primary" (click)="openDialog(detail.folder+'/'+topic.resID+'/'+topic.startfile, topic.topic)">LAUNCH</button>
-        </md-card-actions>
-      </md-card>
-
+      <md-content style="height: 200px; overflow-y: auto">
+          <md-card *ngFor="let topic of topics">
+            <md-card-header>
+              <div md-card-avatar>
+                <md-checkbox id="{{topic.SNo}}"  [(ngModel)]="topic.selected" (change)="optionToggled()"></md-checkbox>
+              </div>
+              <md-card-title><b>S/No. {{topic.SNo}}</b></md-card-title>
+              <md-card-subtitle>{{topic.topic}}</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+              <div fxLayout='row wrap' >
+                <div fxFlex="50" fxFlex.lt-sm="100%">
+                  <p><b>ITQ Synopsis</b></p>
+                  <span [innerHTML]="topic.itqsynopsis"></span>
+                </div>
+                <div fxFlex="5" fxFlex.lt-sm="100%">
+                </div>
+                <div fxFlex="45" fxFlex.lt-sm="100%">
+                  <p><b>MCE Synopsis</b></p>
+                  <span [innerHTML]="topic.mcesynopsis"></span>
+                </div>
+                
+              </div>
+              <div fxLayout='row'>
+                <div fxFlex="40" fxFlex.lt-sm="100%">
+                  <p class="subtitle"><span [innerHTML]="topic.addinfo"></span></p>
+                </div>
+              </div>
+            </md-card-content>
+            <md-card-actions>
+              <!-- <button md-button color="primary" (click)="launch(detail.folder+'/'+topic.resID+'/'+topic.startfile)">LAUNCH</button> -->
+              <div fxFlex></div>
+              <button md-raised-button color="warn" (click)="openDialog(detail.folder+'/'+topic.resID+'/'+topic.startfile, topic.topic)">LAUNCH</button>
+            </md-card-actions>
+          </md-card>
+      </md-content>
         <!-- <thead>
           <tr>
             <th style="width: 1%"><input type="checkbox" (click)="toggleAll()"  [(ngModel)]="isAllSelected" tabindex="0"/></th>

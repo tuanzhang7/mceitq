@@ -1,0 +1,15 @@
+
+<h1 md-dialog-title>{{ data.title }}</h1>
+<div md-dialog-content oncontextmenu="return false">
+  <md-list>
+    <md-list-item *ngFor="let contact of data.message">
+      {{contact}}
+    </md-list-item>
+  </md-list>
+</div>
+<div md-dialog-actions align="end">
+  <div class="layout-row">
+    <div class="flex-50"><button md-raised-button md-dialog-close="Option 1">Close</button></div>
+  </div>
+</div>
+

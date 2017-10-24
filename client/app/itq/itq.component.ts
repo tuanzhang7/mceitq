@@ -72,7 +72,7 @@ export class ItqComponent implements OnInit {
 
   launch(mypage): void {
     const w = screen.width;
-    const h = screen.height;
+    const h = screen.height - 100;
     const winprops = 'height=' + h + ',width=' + w + ',top=0,left=0,scrollbars=0, resizable=0';
     // console.log('/assets/resources/' + mypage);
     window.open('/assets/resources/' + mypage, 'Resources', winprops);
@@ -94,8 +94,22 @@ export class ItqComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(DialogResultComponent, {
       data: data,
-      height: '768px',
-      width: '1024px',
+      height: '550px',
+      width: '800px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.selectedOption = result;
+    });
+  }
+
+  openContactDialog(contact: string) {
+    const data = {
+      message: contact,
+      title: 'Contact Us'
+    };
+    const dialogRef = this.dialog.open(DialogContactComponent, {
+      data: data,
+      width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
       // this.selectedOption = result;
@@ -157,4 +171,14 @@ export class ItqComponent implements OnInit {
 export class DialogResultComponent {
   constructor(public dialogRef: MdDialogRef<DialogResultComponent>,
   @Inject(MD_DIALOG_DATA) public data: any) {}
+}
+
+
+@Component({
+  selector: 'app-contact-dialog-component',
+  templateUrl: 'dialog-contact.html',
+})
+export class DialogContactComponent {
+  constructor(public dialogRef: MdDialogRef<DialogContactComponent>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
 }

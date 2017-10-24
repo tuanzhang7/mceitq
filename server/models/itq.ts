@@ -4,6 +4,7 @@ import { Iitq } from '../../interfaces/Iitq';
 const itqSchema = new mongoose.Schema({
   name: String,
   description: String,
+  contactus: [String],
   roles: [String],
   resources: [
     {

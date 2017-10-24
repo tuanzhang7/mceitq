@@ -1,5 +1,5 @@
 # Create image based on the official Node 6 image from dockerhub
-FROM node:6
+FROM node:6.11.1-alpine
 
 # ENV MONGODB_URI=mongodb://local-mongod:27017/showroom
 

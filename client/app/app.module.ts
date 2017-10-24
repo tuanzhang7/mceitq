@@ -10,7 +10,7 @@ import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { AppComponent } from './app.component';
 import { CatsComponent } from './cats/cats.component';
-import { ItqComponent, DialogResultComponent } from './itq/itq.component';
+import { ItqComponent, DialogResultComponent, DialogContactComponent } from './itq/itq.component';
 import { ItqListComponent } from './itq/list.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
@@ -23,6 +23,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule} from '@angular/material';
 // import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule} from '@angular/flex-layout';
+// import { AffixComponent } from './component/affix.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FlexLayoutModule} from '@angular/flex-layout';
     CatsComponent,
     ItqComponent,
     DialogResultComponent,
+    DialogContactComponent,
     ItqListComponent,
     AboutComponent,
     RegisterComponent,
@@ -38,10 +40,12 @@ import { FlexLayoutModule} from '@angular/flex-layout';
     AccountComponent,
     AdminComponent,
     NotFoundComponent,
+    // AffixComponent
     // BrowserModule,
   ],
   entryComponents: [
-    DialogResultComponent
+    DialogResultComponent,
+    DialogContactComponent
   ],
   imports: [
     RoutingModule,

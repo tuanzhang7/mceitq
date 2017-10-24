@@ -1,10 +1,10 @@
 
-<h1 md-dialog-title>{{ data.title }}</h1>
+<h1 md-dialog-title>{{ data.title }} ---</h1>
 <div md-dialog-content oncontextmenu="return false">
-  <video width="800" height="600"  autoplay controls controlsList="nodownload" *ngIf="data.mediaType==='mp4'">
+  <video width="600" height="400"  autoplay controls controlsList="nodownload" *ngIf="data.mediaType==='mp4'">
       <source data-src="{{ data.videoUrl }}" type="video/mp4">
   </video>
-  <embed [attr.src]="data.saveUrl" width="800" height="600" flashvars="id=hello world" wmode="transparent" *ngIf="data.mediaType!='mp4'" />
+  <embed [attr.src]="data.saveUrl" width="600" height="400" flashvars="id=hello world" wmode="transparent" *ngIf="data.mediaType!='mp4'" />
 </div>
 <div md-dialog-actions>
   <button md-button md-dialog-close="Option 1">Close</button>
